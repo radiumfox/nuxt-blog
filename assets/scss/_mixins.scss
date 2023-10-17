@@ -1,0 +1,12 @@
+@mixin set-typography($color, $weight, $size, $line-height) {
+  color: $color;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
+}
+
+@mixin min-break($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
