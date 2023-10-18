@@ -1,0 +1,27 @@
+.input-search {
+  width: 100%;
+  position: relative;
+
+  &__input {
+    @include set-typography($neutral-0, 400, 16px, 24px);
+    border-radius: 100px;
+    border: 1px solid $neutral-80;
+    background: $neutral-100;
+    padding: 14px 16px 14px 40px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:focus {
+      border: 1px solid $neutral-30;
+      outline: none;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 19px;
+    left: 16px;
+  }
+}

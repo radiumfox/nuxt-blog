@@ -4,10 +4,13 @@ import Footer from './components/Footer.vue';
 import index from './pages/index.vue';
 import posts from './pages/posts.vue';
 import CreatePost from './pages/create-post.vue';
-import {ref, provide} from "vue";
-
+import {ref, provide, onMounted} from "vue";
 const postsList = ref([]);
-provide('postsList', postsList);
+
+onMounted(()=> {
+    provide('postsList', postsList);
+})
+
 const showPost = function (post) {
     console.log(post);
     postsList.value.push({date: new Date().getDate(), text: post})
@@ -16,6 +19,8 @@ const showPost = function (post) {
 </script>
 <template>
     <Header/>
-    <NuxtPage @addPost="showPost"  />
+    <div class="layout-app">
+        <NuxtPage @addPost="showPost"  />
+    </div>
     <Footer/>
 </template>

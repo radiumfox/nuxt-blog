@@ -1,7 +1,14 @@
 .header {
   width: 100%;
-  display: flex;
-  padding: 20px 0;
+  border-bottom: 1px solid $neutral-90;
+
+  &__wrapper {
+    max-width: 335px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+  }
 
   &__button {
     border: none;
@@ -10,10 +17,54 @@
     cursor: pointer;
   }
 
-  .nav {
-    //display: none;
-    &--show {
+  &-nav {
+    position: absolute;
+    background: $neutral-100;
+    width: 100%;
+    left: 0;
+    top: 89px;
+    height: 326px;
+
+
+    &__wrapper {
+      max-width: 335px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+    }
+
+    &__item {
+      margin-bottom: 24px;
+    }
+
+    &__link {
+      @include set-typography($neutral-0, 400, 16px, 24px);
+      text-decoration: none !important;
+
+      &:hover {
+        color: $neutral-20
+      }
+
+      &:active {
+        color: $neutral-40;
+      }
+    }
+
+    &__search {
+      margin-bottom: 24px;
+    }
+  }
+
+  .logo {
+    &__img {
       display: block;
+      width: 48px;
+      height: 48px;
+      background: $neutral-0;
     }
   }
 }

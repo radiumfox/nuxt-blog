@@ -5,6 +5,12 @@
   line-height: $line-height;
 }
 
+@mixin set-typography-no-color($weight, $size, $line-height) {
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $line-height;
+}
+
 @mixin min-break($breakpoint) {
   @media (min-width: $breakpoint) {
     @content;

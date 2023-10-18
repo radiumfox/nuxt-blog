@@ -29,14 +29,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/style-resources',
   ],
-  css: ["@/assets/app.scss"],
-  vite: {
-    css: {
-      // preprocessorOptions: {
-      //   scss: {
-      //     additionalData: '@import "@/assets/app.scss"; ',
-      //   },
-      // },
-    },
-  }
+  css: [
+    '~/assets/css/normalize.css',
+    '~/assets/scss/app.scss'
+  ],
 })

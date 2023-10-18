@@ -1,0 +1,28 @@
+<script setup lang="ts">
+  const staticClass = 'input-search';
+  const props = defineProps({
+      placeholder: {
+          type: String,
+          default: 'Search'
+      },
+      id: {
+          type: String,
+          default: ''
+      }
+  })
+</script>
+<template>
+  <div :class="staticClass">
+      <input
+        :class="`${staticClass}__input`"
+        :id="props.id"
+        :placeholder="props.placeholder"
+      />
+      <div :class="`${staticClass}__icon`">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 13C10.5376 13 13 10.5376 13 7.5C13 4.46243 10.5376 2 7.5 2C4.46243 2 2 4.46243 2 7.5C2 10.5376 4.46243 13 7.5 13Z" stroke="#2E3038" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14 14L11.5 11.5" stroke="#2E3038" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+      </div>
+  </div>
+</template>
