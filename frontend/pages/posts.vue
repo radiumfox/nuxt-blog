@@ -5,11 +5,9 @@ import type {_AsyncData} from "#app/composables/asyncData";
 const config = useRuntimeConfig();
 
 const posts = ref([]);
-
 const title = ref('');
 const content = ref('');
 const tags = ref('');
-
 const editedPost = ref(-1);
 
 async function getPost(id) {
@@ -19,8 +17,7 @@ async function getPost(id) {
 }
 
 
-
-async function  updatePost(id) {
+async function  updatePost(id, index) {
     const tagsList = tags.value.split(',').map(v => v.trim()) || ['']
     const data = {
         id: id,
@@ -41,7 +38,8 @@ async function  updatePost(id) {
 
         if(res.status.value === "success") {
             closeForm();
-            location.reload(); // TODO возвращать объект с отредактированным постом
+            location.reload();
+            // TODO возвращать объект с отредактированным постом
         }
     });
 }
@@ -54,20 +52,20 @@ async function getPosts() {
     });
 }
 
-async function deletePost(id) {
+async function deletePost(id, index) {
     await $useFetch(`${config.public.baseURL}/posts/${id}`, {
         method: "DELETE"
     }).then((res) => {
         console.log(res)
         if(res.status.value === "success") {
-            // const deletedId = res.data.value;
-            location.reload();
+            posts.value.splice(index, 1);
         }
+    }).catch((e)=> {
+        console.log(e);
     })
 }
 
-
-const editPost = function(index) {
+const editPost = (index) => {
     const post = posts.value[index];
     clearInputs();
 
@@ -78,11 +76,11 @@ const editPost = function(index) {
     editedPost.value = index;
 }
 
-const closeForm = function() {
+const closeForm = () => {
     editedPost.value = -1;
 }
 
-const clearInputs = function () {
+const clearInputs = () => {
     content.value = '';
     title.value = '';
     tags.value = '';
@@ -125,13 +123,11 @@ getPosts();
                     </div>
                     <template v-else>
                         <button @click="editPost(idx)" type="button">Edit</button>
-                        <button @click="deletePost(post._id)" type="button">Delete</button>
+                        <button @click="deletePost(post._id, idx)" type="button">Delete</button>
                     </template>
-
                     <hr>
                 </div>
             </template>
         </div>
-
     </div>
 </template>

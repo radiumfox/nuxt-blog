@@ -29,10 +29,11 @@ export class PostsService {
         return deletedPost;
     }
 
-    async updateOne(id: string, updatePostDto: UpdatePostDto): Promise<$Post> {
+    async updateOne(id: string, updatePostDto: UpdatePostDto) {
+
         const updatedPost = await this.postModel
-            .findOneAndUpdate({_id: id}, updatePostDto)
-            .exec();
+            .findByIdAndUpdate({_id: id}, updatePostDto).exec()
+
         return updatedPost;
     }
 }
