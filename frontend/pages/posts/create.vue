@@ -1,33 +1,29 @@
 <script setup lang="ts">
 import { ref } from "vue";
-const { postData } = useFetching();
+import { usePostsStore } from '@/store/posts/posts.store';
+
+const store = usePostsStore();
 
 const title = ref('');
 const content = ref('');
 const tags = ref('');
 
-const createPost = async () => {
+const createPost = () => {
   const date = new Date().toISOString();
-  const tagsList = tags.value.split(',').map(v => v.trim()) || ['']
+  const tagsList = tags.value.split(',').map(v => v.trim()) || [''];
   const data = {
       date: date,
       title: title.value,
       content: content.value,
       tags: tagsList,
       images: ['']
-  }
+  };
 
-  await postData(`/posts`, data)
-      .then((res) => {
-          console.log(res);
-
-          if(res.status.value === "success") {
-              clearInputs();
-          }
-      })
-      .catch((e)=> {
-          console.log(e);
-      });
+  store.createPost(data)
+  // .then((res) => {
+  //     console.log(res);
+  //     if(res) clearInputs();
+  // });
 }
 const clearInputs = () => {
   content.value = '';

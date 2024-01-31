@@ -1,26 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { _AsyncData } from "#app/composables/asyncData";
+import { usePostsStore } from '@/store/posts/posts.store';
 
-const posts = ref([]);
+const store = usePostsStore();
 const title = ref('');
 const content = ref('');
 const tags = ref('');
 const editedPost = ref(-1);
+const posts = store.posts;
 
-const { getData, updateData, deleteData } = useFetching();
+store.getPosts();
 
-const getPost = async (id) => {
-    await getData(`/posts/${id}`)
-        .then((res: _AsyncData<any, any>) => {
-            console.log(res);
-        })
-        .catch((e)=> {
-            console.log(e);
-        });
-}
-
-const updatePost = async (id) => {
+const updatePost = (id, index) => {
     const tagsList = tags.value.split(',').map(v => v.trim()) || ['']
     const data = {
         id: id,
@@ -30,48 +21,17 @@ const updatePost = async (id) => {
         images: ['']
     }
 
-    await updateData(`/posts/${id}`, data)
-        .then((res: _AsyncData<any, any>) => {
-            console.log(res);
-            if(res.status.value === "success") {
-                closeForm();
-                location.reload();
-            }
-        })
-        .catch((e)=> {
-            console.log(e);
-        });
+    store.updatePost(id, data, index);
 }
 
-const getPosts = async () => {
-    await getData('/posts')
-        .then((res: _AsyncData<any, any>) => {
-            if(res.status.value === "success") {
-                posts.value = res.data.value;
-            }
-        })
-        .catch((e)=> {
-            console.log(e);
-        });
-}
-
-const deletePost = async (id: string, index: number) => {
-    await deleteData(`/posts/${id}`)
-        .then((res) => {
-            console.log(res)
-            if(res.status.value === "success") {
-                posts.value.splice(index, 1);
-            }
-        })
-        .catch((e)=> {
-            console.log(e);
-        })
+const deletePost = (id: string, index: number) => {
+    store.deletePost(id, index);
 }
 
 const editPost = (index) => {
-    const post = posts.value[index];
     clearInputs();
 
+    const post = posts[index];
     content.value = post.content;
     title.value = post.title;
     tags.value = post.tags.join(',');
@@ -87,8 +47,6 @@ const clearInputs = () => {
     title.value = '';
     tags.value = '';
 }
-
-getPosts();
 
 </script>
 <template>
@@ -120,7 +78,7 @@ getPosts();
                             <input name="tags" v-model="tags" type="text" placeholder="list separated by commas" />
                         </div>
 
-                        <button type="button" @click="updatePost(post._id)">Save</button>
+                        <button type="button" @click="updatePost(post._id, idx)">Save</button>
                         <button type="button" @click="closeForm()">Close</button>
                     </div>
                     <template v-else>
