@@ -1,10 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-    middleware: 'auth'
+  middleware: 'auth',
 })
 </script>
 <template>
-  <div>
-      Index page
-  </div>
+  <div>Index page</div>
 </template>

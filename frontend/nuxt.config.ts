@@ -1,9 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import { resolve } from "path";
+import { resolve } from 'path'
 export default defineNuxtConfig({
-  $production: {
-  },
+  $production: {},
   $development: {
     devtools: { enabled: true },
   },
@@ -14,13 +13,8 @@ export default defineNuxtConfig({
     },
   },
   alias: {
-    assets: "/<rootDir>/assets"
+    assets: '/<rootDir>/assets',
   },
-  css: [
-      "~/assets/scss/main.scss"
-  ],
-  modules: [
-    '@vueuse/nuxt',
-    '@pinia/nuxt'
-  ],
+  css: ['~/assets/scss/main.scss'],
+  modules: ['@nuxtjs/eslint-module', '@vueuse/nuxt', '@pinia/nuxt'],
 })

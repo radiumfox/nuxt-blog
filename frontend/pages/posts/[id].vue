@@ -1,9 +1,5 @@
-<script lang="ts" setup>
-
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div>
-     post id: {{ $route.params.id }}
-  </div>
+  <div>post id: {{ $route.params.id }}</div>
 </template>

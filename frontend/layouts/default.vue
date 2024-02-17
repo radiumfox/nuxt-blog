@@ -1,8 +1,6 @@
-<script>
-
-</script>
+<script></script>
 <template>
   <div class="default-layout">
-      <slot></slot>
+    <slot></slot>
   </div>
 </template>

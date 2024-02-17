@@ -1,10 +1,8 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 <template>
-    <NuxtLayout>
-        <Header />
-        <NuxtPage />
-        <Footer />
-    </NuxtLayout>
+  <NuxtLayout>
+    <Header />
+    <NuxtPage />
+    <Footer />
+  </NuxtLayout>
 </template>
