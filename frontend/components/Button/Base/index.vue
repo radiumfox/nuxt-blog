@@ -1,5 +1,10 @@
 <script lang="ts" setup>
+import type { PropType } from 'vue'
 const props = defineProps({
+  icon: {
+    type: String,
+    default: '',
+  },
   text: {
     type: String,
     default: '',
@@ -9,5 +14,10 @@ const props = defineProps({
 const emits = defineEmits(['click'])
 </script>
 <template>
-  <button @click="emits('click')">{{ props.text }}</button>
+  <button class="button-base" @click="emits('click')">
+    <span class="button-base__icon">
+      <img :src="props.icon" />
+    </span>
+    {{ props.text }}
+  </button>
 </template>

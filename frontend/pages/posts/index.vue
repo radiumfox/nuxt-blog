@@ -7,9 +7,9 @@ const title = ref('')
 const content = ref('')
 const tags = ref('')
 const editedPost = ref(-1)
-const posts = store.posts
+const posts = store.posts;
 
-store.getPosts()
+store.getPosts();
 
 const updatePost = (id, index) => {
   const tagsList = tags.value.split(',').map((v) => v.trim()) || ['']
@@ -50,31 +50,28 @@ const clearInputs = () => {
 </script>
 <template>
   <div>
-    <div style="margin-bottom: 50px">
       <template v-for="(post, idx) in posts" :key="idx">
-        <div>
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.content }}</p>
-          <em>Date: {{ post.date }}</em>
+        <div class="post">
+          <h3 class="post__title">{{ post.title }}</h3>
+          <p class="post__content">{{ post.content }}</p>
+          <em class="post__date">Date: {{ post.date }}</em>
           <div>
             <template v-for="(tag, index) in post.tags">
               <em>{{ tag }}{{ index < post.tags.length - 1 ? ', ' : '' }}</em>
             </template>
           </div>
 
-          <div v-if="editedPost === idx" style="width: 500px">
+          <div class="edit-form" v-if="editedPost === idx">
             <h3>Edit post</h3>
-            <div style="display: flex; flex-direction: column">
+            <div class="edit-form__item">
               <label for="title">Title</label>
               <input name="title" v-model="title" type="text" />
             </div>
-            <div style="display: flex; flex-direction: column">
+            <div class="edit-form__item">
               <label for="content">Content</label>
               <textarea name="content" v-model="content"></textarea>
             </div>
-            <div
-              style="display: flex; flex-direction: column; margin-bottom: 20px"
-            >
+            <div class="edit-form__item">
               <label for="tags">Tags</label>
               <input
                 name="tags"
@@ -98,6 +95,5 @@ const clearInputs = () => {
           <hr />
         </div>
       </template>
-    </div>
   </div>
 </template>

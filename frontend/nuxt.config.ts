@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
-import { resolve } from 'path'
 export default defineNuxtConfig({
   $production: {},
   $development: {
@@ -12,9 +12,29 @@ export default defineNuxtConfig({
       baseURL: process.env.BASE_URL || '',
     },
   },
+  build: {
+    transpile: ['vuetify'],
+  },
   alias: {
     assets: '/<rootDir>/assets',
   },
   css: ['~/assets/scss/main.scss'],
-  modules: ['@nuxtjs/eslint-module', '@vueuse/nuxt', '@pinia/nuxt'],
+  modules: [
+    '@nuxtjs/eslint-module',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
+    },
+  ],
+  vite: {
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
 })

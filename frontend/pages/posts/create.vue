@@ -20,7 +20,6 @@ const createPost = () => {
   }
 
   store.createPost(data).then((res) => {
-    console.log(res)
     if (res) clearInputs()
   })
 }
@@ -31,17 +30,17 @@ const clearInputs = () => {
 }
 </script>
 <template>
-  <div style="width: 500px">
-    <h3>Create post</h3>
-    <div style="display: flex; flex-direction: column">
+  <div class="create-form" >
+    <h3 class="create-form__title">Create post</h3>
+    <div class="create-form__input" >
       <label for="title">Title</label>
       <input name="title" v-model="title" type="text" />
     </div>
-    <div style="display: flex; flex-direction: column">
+    <div class="create-form__input" >
       <label for="content">Content</label>
       <textarea name="content" v-model="content"></textarea>
     </div>
-    <div style="display: flex; flex-direction: column; margin-bottom: 20px">
+    <div class="create-form__input">
       <label for="tags">Tags</label>
       <input
         name="tags"

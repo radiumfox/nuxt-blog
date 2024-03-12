@@ -1,6 +1,8 @@
 <script></script>
 <template>
-  <div class="default-layout">
-    <slot></slot>
-  </div>
+  <v-app>
+    <div class="default-layout">
+      <slot></slot>
+    </div>
+  </v-app>
 </template>
